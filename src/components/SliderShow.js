@@ -2,7 +2,7 @@
 import React from 'react';
 import PptxGenJS from 'pptxgenjs';
 
-function SlideShow (text) {
+function SlideShow (text, art,mus) {
     const pptx = new PptxGenJS();
     const slides = text.split('\n\n');
 
@@ -19,7 +19,7 @@ function SlideShow (text) {
       slide.background = { color: "F1F1F1" }
     });
 
-    pptx.writeFile({ fileName: 'Browser-PowerPoint-Demo.pptx' });
+    pptx.writeFile({ fileName: `${art} - ${mus}`});
 };
 
 export default SlideShow;

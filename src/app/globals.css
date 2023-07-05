@@ -1,1 +1,31 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Dosis&display=swap');
+@font-face {
+    font-family: Caprasimo;
+    src: url(../../public/fonts/Caprasimo-Regular.ttf);
+}
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  
+  html,
+  body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  body {
+    color: rgb(var(--foreground-rgb));
+    background: #222222
+  }
+  
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+ .title {
+    font-family: Caprasimo, sans-serif;
+ }
