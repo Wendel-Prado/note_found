@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Dosis&display=swap');
 @font-face {
     font-family: Caprasimo;
-    src: url(../../public/fonts/Caprasimo-Regular.ttf);
+    src: url(../components/fonts/Caprasimo-Regular.ttf);
 }
 * {
     box-sizing: border-box;

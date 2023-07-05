@@ -6,12 +6,6 @@ import { Button, Grid, TextField,Card, Typography } from '@mui/material'
 import { Box, Input } from '@chakra-ui/react'
 import SlideShow from '../components/SliderShow'
 
-const fontStyles = `
-    @font-face {
-      font-family: 'Dosis';
-      src: url('https://fonts.googleapis.com/css?family=Dosis&display=swap');
-    }
-  `;
 export default function Home() {
   const [art, setArt] = React.useState();
   const [mus, setMus] = React.useState();
