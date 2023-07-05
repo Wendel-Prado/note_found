@@ -33,8 +33,8 @@ export default function Home() {
       minHeight: "60vh" ,
      flexDirection:"column"
     }}>
-      <Typography variant='h2' color={"#eeeeee"}className={myFont.className}>NOTe FOUND</Typography>
-      <Typography variant='h4' color={"#eeeeee"}  className={myFont.className}>Seu gerador de slides musicais</Typography>
+      <Typography variant='h2' color={"#eeeeee"}className="title" >NOTe FOUND</Typography>
+      <Typography variant='h4' color={"#eeeeee"}  className="title" >Seu gerador de slides musicais</Typography>
       <Grid style={{ display: "flex", flexDirection:"row", gap:20,margin:10}}>
         
         <Input  style={{fontSize:32}} onChange={(e) => setArt(e.target.value)}></Input>
