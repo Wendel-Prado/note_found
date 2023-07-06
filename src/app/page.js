@@ -30,9 +30,9 @@ export default function Home() {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      minHeight: "60vh",
+      minHeight: "90vh",
       flexDirection: "column",
-      
+      background:'#bd2e2e'
     }}>
       <Typography variant='h2' color={"#000000"} className="title" >NOTe FOUND</Typography>
       <Typography variant='h4' color={"#eeeeee"} className="title" >Seu gerador de slides musicais</Typography>
