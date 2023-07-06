@@ -37,10 +37,10 @@ export default function Home() {
       <Typography variant='h2' color={"#000000"} className="title"  style={{fontFamily: 'Caprasimo'}}>NOTe FOUND</Typography>
       <Typography variant='h4' color={"#eeeeee"} className="title" style={{fontFamily: 'Caprasimo'}}>Seu gerador de slides musicais</Typography>
       <Grid style={{ display: "flex", flexDirection: "row", margin: 10 }}>
-        <Grid style={{ display: "flex", flexDirection: "row", gap: 20, margin: 5, background: "#fff", borderRadius: 20, padding: 10, borderRadius: 15, border: "5px solid #000000" }}>
+        <Grid style={{ display: "flex", flexDirection: "row", gap: 20, margin: 5, background: "#fff", borderRadius: 20, padding: 10, borderRadius: 15, border: "5px solid #000000", boxShadow:"4px 3px" }}>
           <Input fontFamily='Caprasimo' _placeholder={{ fontFamily: 'Caprasimo', marginLeft: 45 }} placeholder='Cantor' style={{ fontSize: 32, borderRadius: 15, borderRadius: 15, border: "5px solid #000000" }} onChange={(e) => setArt(e.target.value)}></Input>
         </Grid>
-        <Grid style={{ display: "flex", flexDirection: "row", gap: 20, margin: 5, background: "#fff", borderRadius: 20, padding: 10, borderRadius: 15, border: "5px solid #000000" }}>
+        <Grid style={{ display: "flex", flexDirection: "row", gap: 20, margin: 5, background: "#fff", borderRadius: 20, padding: 10, borderRadius: 15, border: "5px solid #000000",boxShadow:"4px 3px" }}>
           <Input _placeholder={{ fontFamily: 'Caprasimo', marginRight: 45 }} placeholder='Música' fontFamily='Caprasimo' style={{ fontSize: 32, borderRadius: 15, border: "5px solid #000000" }} onChange={(e) => setMus(e.target.value)}></Input>
         </Grid>
       </Grid>
