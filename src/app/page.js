@@ -19,7 +19,7 @@ export default function Home() {
         if (res.data.type == "exact" || res.data.type == "aprox") {
           const { text } = res.data.mus[0]
           setLyrics(text)
-          // SlideShow(text, art,mus)
+          SlideShow(text, art,mus)
         }
       })
   }
@@ -34,8 +34,8 @@ export default function Home() {
       flexDirection: "column",
       background:'#bd2e2e'
     }}>
-      <Typography variant='h2' color={"#000000"} className="title" >NOTe FOUND</Typography>
-      <Typography variant='h4' color={"#eeeeee"} className="title" >Seu gerador de slides musicais</Typography>
+      <Typography variant='h2' color={"#000000"} className="title"  style={{fontFamily: 'Caprasimo'}}>NOTe FOUND</Typography>
+      <Typography variant='h4' color={"#eeeeee"} className="title" style={{fontFamily: 'Caprasimo'}}>Seu gerador de slides musicais</Typography>
       <Grid style={{ display: "flex", flexDirection: "row", margin: 10 }}>
         <Grid style={{ display: "flex", flexDirection: "row", gap: 20, margin: 5, background: "#fff", borderRadius: 20, padding: 10, borderRadius: 15, border: "5px solid #000000" }}>
           <Input fontFamily='Caprasimo' _placeholder={{ fontFamily: 'Caprasimo', marginLeft: 45 }} placeholder='Cantor' style={{ fontSize: 32, borderRadius: 15, borderRadius: 15, border: "5px solid #000000" }} onChange={(e) => setArt(e.target.value)}></Input>
