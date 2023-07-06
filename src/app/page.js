@@ -18,7 +18,7 @@ export default function Home() {
         if (res.data.type == "exact" || res.data.type == "aprox") {
           const { text } = res.data.mus[0]
           setLyrics(text)
-          // SlideShow(text, art,mus)
+          SlideShow(text, art,mus)
         }
       })
   }
