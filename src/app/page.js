@@ -3,9 +3,11 @@ import React from 'react'
 import Image from 'next/image'
 import axios from 'axios'
 import { Button, Grid, TextField, Card, Typography } from '@mui/material'
-import { Box, Input } from '@chakra-ui/react'
+import { Box, Input, Container } from '@chakra-ui/react'
 import localFont from 'next/font/local'
 import SlideShow from '../components/SliderShow'
+import SearchIcon from '@mui/icons-material/Search';
+import Fab from '@mui/material/Fab';
 const myFont = localFont({ src: '../components/fonts/Caprasimo-Regular.ttf' })
 export default function Home() {
   const [art, setArt] = React.useState();
@@ -19,38 +21,39 @@ export default function Home() {
         if (res.data.type == "exact" || res.data.type == "aprox") {
           const { text } = res.data.mus[0]
           setLyrics(text)
-          SlideShow(text, art,mus)
+          SlideShow(text, art, mus)
         }
       })
   }
 
   return (
+    <Grid style={{height:"100%",width:"100%"}}>
+      <Container style={{display:"grid", justifyContent:"center", height:"60vh"}}>
+        <Grid style={{display:"flex",justifyContent:"center", alignItems:"flex-end"}}>
+        <Image title='logo'  alt='logo' src={'/image/stuune.png'} width={298} height={150} style={{objectFit:"contain"}}></Image>
+        </Grid>
+        <Grid item lg={12} justifyContent="center" >
+          <TextField 
+          placeholder='Cantor/Banda'
+          size='small' 
+          style={{margin:10, background:"#fff"}}/>
+          <TextField 
+          placeholder='Música'
+          size='small' 
+          style={{margin:10,background:"#fff"}}/>
+          <Fab>
+            <SearchIcon/>
+          </Fab>
+        </Grid>
 
-    <Grid container style={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      minHeight: "90vh",
-      flexDirection: "column",
-      background:'#bd2e2e'
-    }}>
-      <Typography variant='h2' color={"#000000"} className="title"  style={{fontFamily: 'Caprasimo'}}>NOTe FOUND</Typography>
-      <Typography variant='h4' color={"#eeeeee"} className="title" style={{fontFamily: 'Caprasimo'}}>Seu gerador de slides musicais</Typography>
-      <Grid style={{ display: "flex", flexDirection: "row", margin: 10 }}>
-        <Grid style={{ display: "flex", flexDirection: "row", gap: 20, margin: 5, background: "#fff", borderRadius: 20, padding: 10, borderRadius: 15, border: "5px solid #000000", boxShadow:"4px 3px" }}>
-          <Input fontFamily='Caprasimo' _placeholder={{ fontFamily: 'Caprasimo', marginLeft: 45 }} placeholder='Cantor' style={{ fontSize: 32, borderRadius: 15, borderRadius: 15, border: "5px solid #000000" }} onChange={(e) => setArt(e.target.value)}></Input>
-        </Grid>
-        <Grid style={{ display: "flex", flexDirection: "row", gap: 20, margin: 5, background: "#fff", borderRadius: 20, padding: 10, borderRadius: 15, border: "5px solid #000000",boxShadow:"4px 3px" }}>
-          <Input _placeholder={{ fontFamily: 'Caprasimo', marginRight: 45 }} placeholder='Música' fontFamily='Caprasimo' style={{ fontSize: 32, borderRadius: 15, border: "5px solid #000000" }} onChange={(e) => setMus(e.target.value)}></Input>
-        </Grid>
-      </Grid>
-      <Button onClick={resquestMusic} variant='contained' style={{borderRadius: '11px',
-    border: '7px solid #000000',
-    fontFamily: 'Caprasimo',
-    background: '#ffffff',
-    color: '#2a2929',
-    fontSize: '18px'}}>Gerar Slide</Button>
-      <Box>{lyrics}</Box>
+      </Container >
+      <Container style={{display:"flex", height:"60vh"}}>
+        <Grid style={{height:"100%",width:"40%"}}>
+          <Typography variant='h3' className={"title"} style={{fontFamily:""}}>Como utilizar</Typography>
+          <Typography variant='h3' className={"title"} style={{fontFamily:""}}>e por que utilizar o STUUNE?</Typography>
+          </Grid>
+        <Grid style={{height:"100%",width:"60%"}}></Grid>
+      </Container >
     </Grid>
   )
 }

@@ -4,6 +4,18 @@
     font-family: Caprasimo;
     src: url(../components/fonts/Caprasimo-Regular.ttf);
 }
+@font-face {
+  font-family: Belanosima-Regular;
+  src: url(../components/fonts/Belanosima/Belanosima-Regular.ttf);
+}
+@font-face {
+  font-family: Belanosima-SemiBold;
+  src: url(../components/fonts/Belanosima/Belanosima-SemiBold.ttf);
+}
+@font-face {
+  font-family: Belanosima-Bold;
+  src: url(../components/fonts/Belanosima/Belanosima-Bold.ttf);
+}
 * {
     box-sizing: border-box;
     padding: 0;
@@ -18,7 +30,7 @@
   
   body {
     color: rgb(var(--foreground-rgb));
-    background: #202020
+    background: #fffefe
   }
   
   a {
@@ -27,5 +39,5 @@
   }
   
  .title {
-    font-family: Caprasimo, sans-serif !important;
+    font-family: Belanosima-Bold, sans-serif !important;
  }
