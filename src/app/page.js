@@ -2,7 +2,7 @@
 import React from 'react'
 import Image from 'next/image'
 import axios from 'axios'
-import { Button, Grid, TextField, Card, Typography } from '@mui/material'
+import { Button, Grid, TextField, Card, Typography,Divider } from '@mui/material'
 import { Box, Input, Container } from '@chakra-ui/react'
 import localFont from 'next/font/local'
 import SlideShow from '../components/SliderShow'
@@ -27,8 +27,9 @@ export default function Home() {
   }
 
   return (
-    <Grid style={{height:"100%",width:"100%"}}>
-      <Container style={{display:"grid", justifyContent:"center", height:"60vh"}}>
+    <Grid style={{position:"absolute",height:"100%",width:"100%"}}>
+      <Grid style={{width:"100%", height:"5vh", background:"#2a2338"}}></Grid>
+      <Container style={{display:"grid", justifyContent:"center", height:"50vh"}}>
         <Grid style={{display:"flex",justifyContent:"center", alignItems:"flex-end"}}>
         <Image title='logo'  alt='logo' src={'/image/stuune.png'} width={298} height={150} style={{objectFit:"contain"}}></Image>
         </Grid>
@@ -36,7 +37,8 @@ export default function Home() {
           <TextField 
           placeholder='Cantor/Banda'
           size='small' 
-          style={{margin:10, background:"#fff"}}/>
+          style={{margin:10, background:"#fff"}}
+        />
           <TextField 
           placeholder='Música'
           size='small' 
@@ -47,13 +49,18 @@ export default function Home() {
         </Grid>
 
       </Container >
-      <Container style={{display:"flex", height:"60vh"}}>
-        <Grid style={{height:"100%",width:"40%"}}>
-          <Typography variant='h3' className={"title"} style={{fontFamily:""}}>Como utilizar</Typography>
-          <Typography variant='h3' className={"title"} style={{fontFamily:""}}>e por que utilizar o STUUNE?</Typography>
-          </Grid>
-        <Grid style={{height:"100%",width:"60%"}}></Grid>
+      <Container container mb={12} style={{display:"flex",height:"60vh",width:"100%",justifyContent:"space-between", }}>
+        <Card item mb={12} style={{height:"100%",width:"70%",background:"#8B51FF", margin:"0px 10px"}}>
+          <Typography variant='h5' align='center' style={{padding:10, color:"#fff"}}>Como pesquisar ?</Typography>
+        </Card>
+        <Card item mb={12} style={{height:"100%",width:"70%",background:"#8B51FF"}}>
+          <Typography variant='h5' align='center' style={{padding:10, color:"#fff"}}>Como visualizar?</Typography>
+        </Card>
+        <Card item mb={12} style={{height:"100%",width:"70%",background:"#8B51FF", margin:"0px 10px"}}>
+          <Typography variant='h5' align='center' style={{padding:10, color:"#fff"}}>Como baixar?</Typography>
+        </Card>
       </Container >
+      <footer style={{width:"100%", height:"5vh", background:"#2a2338", marginTop:10}}></footer>
     </Grid>
   )
 }
