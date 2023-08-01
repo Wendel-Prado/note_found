@@ -4,7 +4,7 @@ import { Dosis } from 'next/font/google'
 const inter = Dosis({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'NoteFound',
+  title: 'Stuune',
   description: 'Slides of musics',
 }
 

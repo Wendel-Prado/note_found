@@ -27,11 +27,11 @@ export default function Home() {
   }
 
   return (
-    <Grid style={{position:"absolute",height:"100%",width:"100%"}}>
-      <Grid style={{width:"100%", height:"5vh", background:"#2a2338"}}></Grid>
-      <Container style={{display:"grid", justifyContent:"center", height:"50vh"}}>
-        <Grid style={{display:"flex",justifyContent:"center", alignItems:"flex-end"}}>
-        <Image title='logo'  alt='logo' src={'/image/stuune.png'} width={298} height={150} style={{objectFit:"contain"}}></Image>
+    <Grid style={{position:"absolute",height:"100%",width:"100%", display:'grid',alignContent:"space-between" }}>
+      <Grid style={{width:"100%", height:"2vh", background:"#2a2338"}}></Grid>
+      <Grid style={{display:"grid", justifyContent:"center", height:"50vh"}}>
+        <Grid style={{display:"flex",justifyContent:"center", alignItems:"center"}}>
+        <Image title='logo'  alt='logo' src={'/image/stuunee.png'} width={325} height={95} ></Image>
         </Grid>
         <Grid item lg={12} justifyContent="center" >
           <TextField 
@@ -43,23 +43,12 @@ export default function Home() {
           placeholder='Música'
           size='small' 
           style={{margin:10,background:"#fff"}}/>
-          <Fab>
-            <SearchIcon/>
+          <Fab style={{background:'#004aad'}}>
+            <SearchIcon sx={{ color: '#fff' }} />
           </Fab>
         </Grid>
-
-      </Container >
-      <Container container mb={12} style={{display:"flex",height:"60vh",width:"100%",justifyContent:"space-between", }}>
-        <Card item mb={12} style={{height:"100%",width:"70%",background:"#8B51FF", margin:"0px 10px"}}>
-          <Typography variant='h5' align='center' style={{padding:10, color:"#fff"}}>Como pesquisar ?</Typography>
-        </Card>
-        <Card item mb={12} style={{height:"100%",width:"70%",background:"#8B51FF"}}>
-          <Typography variant='h5' align='center' style={{padding:10, color:"#fff"}}>Como visualizar?</Typography>
-        </Card>
-        <Card item mb={12} style={{height:"100%",width:"70%",background:"#8B51FF", margin:"0px 10px"}}>
-          <Typography variant='h5' align='center' style={{padding:10, color:"#fff"}}>Como baixar?</Typography>
-        </Card>
-      </Container >
+    
+      </Grid >
       <footer style={{width:"100%", height:"5vh", background:"#2a2338", marginTop:10}}></footer>
     </Grid>
   )
