@@ -3,6 +3,7 @@ import React from 'react';
 import PptxGenJS from 'pptxgenjs';
 
 function SlideShow (text, art,mus) {
+  if(text && art && mus){
     const pptx = new PptxGenJS();
     const slides = text.split('\n\n');
 
@@ -20,6 +21,7 @@ function SlideShow (text, art,mus) {
     });
 
     pptx.writeFile({ fileName: `${art} - ${mus}`});
+  }
 };
 
 export default SlideShow;

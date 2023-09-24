@@ -29,6 +29,8 @@
   }
   
   body {
+    display: grid;
+    justify-content: space-between;
     color: rgb(var(--foreground-rgb));
     background: #fffefe
   }

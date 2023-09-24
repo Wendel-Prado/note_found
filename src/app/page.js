@@ -1,55 +1,158 @@
 'use client'
-import React from 'react'
-import Image from 'next/image'
-import axios from 'axios'
-import { Button, Grid, TextField, Card, Typography,Divider } from '@mui/material'
-import { Box, Input, Container } from '@chakra-ui/react'
-import localFont from 'next/font/local'
-import SlideShow from '../components/SliderShow'
+import React from 'react';
+import Image from 'next/image';
+import axios from 'axios';
+import { Button, Grid, TextField, Card, Typography, Divider, InputAdornment } from '@mui/material';
+import { Box, Input, Container, Paper, AppBar, Toolbar } from '@mui/material'; // Importe as bibliotecas corretas para AppBar e Toolbar
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import TheaterComedyIcon from '@mui/icons-material/TheaterComedy';
+import AudiotrackIcon from '@mui/icons-material/Audiotrack';
+import localFont from 'next/font/local';
+import SlideShow from '../components/SliderShow';
+import GraphicEqIcon from '@mui/icons-material/GraphicEq';
+import DownloadIcon from '@mui/icons-material/Download';
 import SearchIcon from '@mui/icons-material/Search';
 import Fab from '@mui/material/Fab';
-const myFont = localFont({ src: '../components/fonts/Caprasimo-Regular.ttf' })
-export default function Home() {
-  const [art, setArt] = React.useState();
-  const [mus, setMus] = React.useState();
-  const [lyrics, setLyrics] = React.useState();
-  async function resquestMusic() {
-    const key = '05f59b4739df434b6fa440100dd6c7b8'
-    await axios.get(`https://api.vagalume.com.br/search.php?art=${art}&mus=${mus}&apikey=${key}`)
-      .then((res) => {
+import { Dosis } from 'next/font/google'
 
-        if (res.data.type == "exact" || res.data.type == "aprox") {
-          const { text } = res.data.mus[0]
-          setLyrics(text)
-          SlideShow(text, art, mus)
+const inter = Dosis({ subsets: ['latin'] })
+const myFont = localFont({ src: '../components/fonts/Caprasimo-Regular.ttf' });
+
+export default function Home() {
+  const [art, setArt] = React.useState('');
+  const [mus, setMus] = React.useState('');
+  const [lyrics, setLyrics] = React.useState('');
+  const [steps, setSteps] = React.useState(0);
+  const [artFound, setArtFound] = React.useState('');
+  const [musFound, setMusFound] = React.useState('');
+  async function requestMusic() {
+    const key = '05f59b4739df434b6fa440100dd6c7b8';
+    await axios
+      .get(`https://api.vagalume.com.br/search.php?art=${art}&mus=${mus}&apikey=${key}`)
+      .then((res) => {
+        if (res.data.type === 'exact' || res.data.type === 'aprox') {
+          const { text } = res.data.mus[0];
+          setArtFound(res.data.art.name);
+          setMusFound(res.data.mus[0].name)
+          setLyrics(text);
+          // SlideShow(text, art, mus);
+
         }
-      })
+      });
   }
 
   return (
-    <Grid style={{position:"absolute",height:"100%",width:"100%", display:'grid',alignContent:"space-between" }}>
-      <Grid style={{width:"100%", height:"2vh", background:"#2a2338"}}></Grid>
-      <Grid style={{display:"grid", justifyContent:"center", height:"50vh"}}>
-        <Grid style={{display:"flex",justifyContent:"center", alignItems:"center"}}>
-        <Image title='logo'  alt='logo' src={'/image/stuunee.png'} width={325} height={95} ></Image>
+    <Grid style={{ position: 'absolute', height: '100%', width: '100%', background: 'url(https://static.vecteezy.com/ti/fotos-gratis/p3/15268125-viajante-turistagrafo-em-pe-no-topo-verde-na-montanha-segurando-na-cameragrafica-digital-de-maos-alpinista-tirandografia-garota-aprecia-a-paisagem-panoramica-da-natureza-em-viagem-gratis-foto.jpg)' }}>
+      <AppBar position="static" style={{ background: '#e4e4e4' }}>
+        <Toolbar>
+          <Image title="logo" alt="logo" src={'/image/stuunee.png'} width={175} height={55} />
+        </Toolbar>
+      </AppBar>
+
+      <Grid container style={{ height: 'calc(100vh - 64px)', display: 'flex', justifyContent: 'space-between' }}>
+        <Grid item style={{ background: '#1E1E1E', padding: '16px', width: '19vw' }}>
+          <Typography variant="h6" className={inter.className} color='#fff'>Pesquise por sua música!</Typography>
+          <TextField
+            style={{ background: 'white', borderRadius: '20px' }}
+            label="Artista"
+            variant="outlined"
+            fullWidth margin="normal"
+            value={art}
+            onChange={(e) => setArt(e.target.value)}
+            size='small'
+            InputProps={{
+              style: {
+                borderRadius: "20px",
+              },
+              endAdornment: (
+                <InputAdornment position="end">
+                  <GraphicEqIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+          <TextField
+            style={{ background: 'white', borderRadius: '20px' }}
+            label="Música" 
+            variant="outlined"
+            fullWidth 
+            margin="normal"
+            value={mus}
+            onChange={(e) => setMus(e.target.value)}
+            size='small'
+            InputProps={{
+              style: {
+                borderRadius: "20px",
+              },
+              endAdornment: (
+                <InputAdornment position="end">
+                  <AudiotrackIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+          <Grid style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Fab size='medium' variant="extended" color="primary" onClick={requestMusic}>
+              <SearchIcon sx={{ mr: 1 }} />
+              Pesquisar
+            </Fab>
+          </Grid>
+          <Divider style={{ margin: '8px 0', color: '#f3f3f3' }} />
+          <Grid>
+            <Typography className={inter.className} variant="h6" color='#fff'>Personalização</Typography>
+          </Grid>
         </Grid>
-        <Grid item lg={12} justifyContent="center" >
-          <TextField 
-          placeholder='Cantor/Banda'
-          size='small' 
-          style={{margin:10, background:"#fff"}}
-        />
-          <TextField 
-          placeholder='Música'
-          size='small' 
-          style={{margin:10,background:"#fff"}}/>
-          <Fab style={{background:'#004aad'}}>
-            <SearchIcon sx={{ color: '#fff' }} />
-          </Fab>
+
+        <Grid item
+          style={{
+            display: 'flex',
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: '16px',
+            gap: 10,
+            width: '80%'
+          }}>
+          <Paper elevation={3} style={{ padding: '16px', height: '65vh', width: '80%' }}>
+            <Grid style={{ display: 'flex', alignItems:'center', justifyContent:'center'}}>
+              <Typography variant="h5">{artFound && musFound ? `${artFound} - ${musFound}` : ''}</Typography>
+            </Grid>
+            <Divider style={{ margin: '8px 0' }} />
+            <Grid style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center',
+              overflowY: 'auto',
+              height: '90%',
+            }}>{lyrics.split('\n\n')[steps].split('\n').map((line, index) => (
+              <div>
+                <Typography style={{ fontSize: 36 }} key={index}>
+                  {line}
+                </Typography>
+              </div>
+            ))}
+            </Grid>
+          </Paper>
+          <Grid style={{ display: 'flex', width: '80%', justifyContent: 'space-between', gap: 10, padding: 10, borderRadius: 10 }}>
+            <Fab size='medium' variant='extended' color="primary" onClick={() => SlideShow(lyrics, artFound, musFound)}>
+              <DownloadIcon sx={{ mr: 1 }} />
+              Baixar
+            </Fab>
+            <Grid style={{ display: 'flex', gap: 10 }}>
+              <Fab size='medium' variant="extended" color="primary" onClick={() => setSteps(steps - 1 <= 0 ? 0 : steps - 1)}>
+                <NavigateBeforeIcon sx={{ mr: 1 }} />
+                Voltar
+              </Fab>
+              <Fab size='medium' variant="extended" color="primary" onClick={() => setSteps(steps + 1 >= lyrics.split('\n\n').length ? lyrics.split('\n\n').length - 1 : steps + 1)}>
+                <NavigateNextIcon sx={{ mr: 1 }} />
+                Próximo
+              </Fab>
+            </Grid>
+          </Grid>
         </Grid>
-    
-      </Grid >
-      <footer style={{width:"100%", height:"5vh", background:"#2a2338", marginTop:10}}></footer>
-    </Grid>
-  )
+      </Grid>
+    </Grid >
+  );
 }
