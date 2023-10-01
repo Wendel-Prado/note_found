@@ -319,7 +319,7 @@ export default function Home() {
             }}>
             <Paper elevation={3} style={{ background:selectedColorBackground, padding: '16px', height: !fullScreenActive ? '65vh' : '90vh', width: '100%' }}>
               <Grid style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Typography variant="h5">{artFound && musFound ? `${artFound} - ${musFound}` : ''}</Typography>
+                <Typography variant="h5" color={colorText}>{artFound && musFound ? `${artFound} - ${musFound}` : ''}</Typography>
               </Grid>
               <Divider style={{ margin: '8px 0' }} />
               <Grid style={{
@@ -331,7 +331,7 @@ export default function Home() {
                 height: '90%',
               }}>{lyrics.split('\n\n')[steps].split('\n').map((line, index) => (
                 <div>
-                  <Typography style={{ fontSize: 36 }} key={index}>
+                  <Typography style={{ fontSize: 36, color:colorText}} key={index}>
                     {line}
                   </Typography>
                 </div>
