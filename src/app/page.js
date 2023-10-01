@@ -16,6 +16,9 @@ import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import DownloadIcon from '@mui/icons-material/Download';
 import SearchIcon from '@mui/icons-material/Search';
 import Fab from '@mui/material/Fab';
+import FormatColorTextIcon from '@mui/icons-material/FormatColorText';
+import { ChromePicker } from 'react-color'
+import ColorLensIcon from '@mui/icons-material/ColorLens';
 import { Dosis } from 'next/font/google'
 import useMediaQuery from '@mui/material/useMediaQuery';
 const inter = Dosis({ subsets: ['latin'] })
@@ -30,7 +33,12 @@ export default function Home() {
   const [artFound, setArtFound] = React.useState('');
   const [musFound, setMusFound] = React.useState('');
   const [fullScreenActive, setFullScreenActive] = React.useState('');
+  const [colorPickerBackground, setColorPickerBackground] = React.useState(false);
+  const [colorPickerText, setColorPickerText] = React.useState(false);
+  const [selectedColorBackground, setSelectedColorBackground] = React.useState('#fff')
+  const [colorText, setSelectedColorText] = React.useState("#000");
   async function requestMusic() {
+    setSteps(0)
     const key = '05f59b4739df434b6fa440100dd6c7b8';
     await axios
       .get(`https://api.vagalume.com.br/search.php?art=${art}&mus=${mus}&apikey=${key}`)
@@ -69,6 +77,18 @@ export default function Home() {
         document.webkitCancelFullScreen();
       }
     }
+  }
+  function handleClickBackground() {
+    setColorPickerBackground(!colorPickerBackground)
+  }
+  function handleClickTextColor(){
+    setColorPickerText(!colorPickerText)
+  }
+  function handleChangeBackground(color){
+    setSelectedColorBackground(color.hex)
+  }
+  function handleChangeText(color){
+    setSelectedColorText(color.hex)
   }
   return (
     !isMobile ?
@@ -144,9 +164,10 @@ export default function Home() {
               gap: 10,
               width: '80%'
             }}>
-            <Paper elevation={3} style={{ padding: '16px', height: !fullScreenActive ? '65vh' : '90%', width: !fullScreenActive ? '80%' : '100%' }}>
+            <Paper elevation={3} style={{ background:selectedColorBackground, padding: '16px', height: !fullScreenActive ? '65vh' : '90%', width: !fullScreenActive ? '80%' : '100%' }}>
               <Grid style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Typography variant="h5">{artFound && musFound ? `${artFound} - ${musFound}` : ''}</Typography>
+                <Typography variant="h5" color={colorText}>{artFound && musFound ? `${artFound} - ${musFound}` : ''}</Typography>
+
               </Grid>
               <Divider style={{ margin: '8px 0' }} />
               <Grid style={{
@@ -158,7 +179,7 @@ export default function Home() {
                 height: '90%',
               }}>{lyrics.split('\n\n')[steps].split('\n').map((line, index) => (
                 <div>
-                  <Typography style={{ fontSize: 36 }} key={index}>
+                  <Typography style={{ fontSize: 36, color:colorText }} key={index}>
                     {line}
                   </Typography>
                 </div>
@@ -177,6 +198,40 @@ export default function Home() {
                 </Fab>
               </Grid>
               <Grid style={{ display: 'flex', gap: 10 }}>
+              {colorPickerBackground && (
+                  <div style={{ position: 'absolute', bottom:140 }}>
+                    <ChromePicker
+                      color={selectedColorBackground}
+                      onChange={handleChangeBackground}
+                    />
+                  </div>
+                )}
+                <div>
+                  <Fab
+                    size="medium"
+                    variant="extended"
+                    color="primary"
+                    onClick={handleClickBackground}
+                  >
+                    <ColorLensIcon />
+                  </Fab>
+
+
+                </div>
+                {colorPickerText && (
+                  <div style={{ position: 'absolute', bottom: 140 }}>
+                    <ChromePicker
+                      color={colorText}
+                      onChange={handleChangeText}
+                    />
+                  </div>
+                )}
+                <div>
+                <Fab size='medium' variant="extended" color="primary" onClick={handleClickTextColor}>
+                  <FormatColorTextIcon  />
+                </Fab>
+              
+                </div>
                 <Fab size='medium' variant="extended" color="primary" onClick={() => SlideShow(lyrics, artFound, musFound)}>
                   <DownloadIcon />
                 </Fab>
@@ -262,7 +317,7 @@ export default function Home() {
               gap: 10,
               width: '100%'
             }}>
-            <Paper elevation={3} style={{ padding: '16px', height: !fullScreenActive ? '65vh' : '90vh', width: '100%' }}>
+            <Paper elevation={3} style={{ background:selectedColorBackground, padding: '16px', height: !fullScreenActive ? '65vh' : '90vh', width: '100%' }}>
               <Grid style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Typography variant="h5">{artFound && musFound ? `${artFound} - ${musFound}` : ''}</Typography>
               </Grid>
@@ -283,9 +338,9 @@ export default function Home() {
               ))}
               </Grid>
             </Paper>
-            <Grid style={{ display: 'flex', width: '100%', justifyContent: 'space-between', gap: 10, }}>
+            <Grid style={{ display: 'flex', width: '100%', justifyContent: 'space-between', gap: 5 }}>
 
-              <Grid style={{ display: 'flex', gap: 10 }}>
+              <Grid style={{ display: 'flex', gap: 5 }}>
                 <Fab size='medium' variant="extended" color="primary" onClick={() => setSteps(steps - 1 <= 0 ? 0 : steps - 1)}>
                   <NavigateBeforeIcon />
 
@@ -295,7 +350,41 @@ export default function Home() {
 
                 </Fab>
               </Grid>
-              <Grid style={{ display: 'flex', gap: 10 }}>
+              <Grid style={{ display: 'flex', gap: 5 }}>
+                {colorPickerBackground && (
+                  <div style={{ position: 'absolute', bottom: 70 }}>
+                    <ChromePicker
+                      color={selectedColorBackground}
+                      onChange={handleChangeBackground}
+                    />
+                  </div>
+                )}
+                <div>
+                  <Fab
+                    size="medium"
+                    variant="extended"
+                    color="primary"
+                    onClick={handleClickBackground}
+                  >
+                    <ColorLensIcon />
+                  </Fab>
+
+
+                </div>
+                {colorPickerText && (
+                  <div style={{ position: 'absolute', bottom: 70 }}>
+                    <ChromePicker
+                      color={colorText}
+                      onChange={handleChangeText}
+                    />
+                  </div>
+                )}
+                <div>
+                <Fab size='medium' variant="extended" color="primary" onClick={handleClickTextColor}>
+                  <FormatColorTextIcon  />
+                </Fab>
+              
+                </div>
                 <Fab size='medium' variant="extended" color="primary" onClick={() => SlideShow(lyrics, artFound, musFound)}>
                   <DownloadIcon />
                 </Fab>
